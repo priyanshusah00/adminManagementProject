@@ -4,7 +4,7 @@ import NewTasklist from "./NewTasklist";
 import CompletedTask from "./CompletedTask";
 import FailedTask from "./FailedTask";
 
-const TaskList = ({ data }) => {
+const TaskList = ({ data, setUserData }) => {
   return (
     <div
       id="tasklist"
@@ -12,13 +12,15 @@ const TaskList = ({ data }) => {
     >
       {data.tasks.map((task, idx) => {
         if (task.newTask) {
-          return <NewTasklist key={idx} data={task} />;
+          return <NewTasklist key={idx} data={task} setUserData={setUserData} />;
         } else if (task.active) {
-          return <AcceptTask key={idx} data={task} />;
+          return <AcceptTask key={idx} data={task} setUserData={setUserData} />;
         } else if (task.completed) {
-          return <CompletedTask key={idx} data={task} />;
+          return (
+            <CompletedTask key={idx} data={task} setUserData={setUserData} />
+          );
         } else if (task.failed) {
-          return <FailedTask key={idx} data={task} />;
+          return <FailedTask key={idx} data={task} setUserData={setUserData} />;
         } else {
           return null;
         }
